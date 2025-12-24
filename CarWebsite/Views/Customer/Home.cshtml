@@ -1,0 +1,639 @@
+﻿<!-- Bootstrap CSS -->
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css">
+
+<!-- Bootstrap JS -->
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/flatpickr/4.6.13/flatpickr.min.css">
+<script src="https://cdnjs.cloudflare.com/ajax/libs/flatpickr/4.6.13/flatpickr.min.js"></script>
+
+<style>
+    /*Top bar*/
+    .topbar {
+        position: fixed;
+        background-color: #0B0B0B; 
+        color: white;
+        padding: 12px 40px;
+        display: flex;
+        top: 0;
+        left: 0;
+        right: 0;
+        height: 50px;
+        justify-content: space-between;
+        align-items: center;
+        z-index: 9999;
+    }
+
+    .website-name {
+        font-size: 24px;
+        font-style: italic;
+        font-weight: bold;
+    }
+
+    .action-container {
+        display: flex;
+        gap: 30px;
+    }
+
+    .action-btn {
+        color: white;
+        cursor: pointer;
+        font-size: 18px;
+    }
+
+        .action-btn:hover {
+            color: #BFA76F; 
+        }
+
+    /*Hero section*/
+    .hero {
+        width: 100%;
+        height: 80vh;
+        position: relative;
+        display: flex;
+        margin-top: 50px;
+        border-bottom-left-radius: 10px;
+        border-bottom-right-radius: 10px;
+        pointer-events: none;
+    }
+
+    .hero-right {
+        background-color: #BFA76F; 
+        border: 1px solid #BFA76F;
+        border-bottom-right-radius: 10px;
+        width: 45%;
+        z-index: 0;
+        flex-shrink: 0;
+        pointer-events: auto;
+    }
+
+    .hero-left {
+        flex: 1;
+        text-align: center;
+        padding: 150px 40px;
+        color: white;
+        background-color: #0B0B0B; 
+        pointer-events: auto;
+    }
+
+    .search-wrapper {
+        position: relative;
+        z-index: 999;
+    }
+
+    .search-input {
+        width: 300px;
+        padding: 12px 15px;
+        font-size: 16px;
+        border: 2px solid #BFA76F;
+        border-radius: 20px;
+        background: transparent;
+        outline: none;
+        color: black;
+        margin-left: 640px;
+        position: relative;
+        z-index: 99999;
+    }
+
+    /*Car Card*/
+    .car-card {
+        width: 320px;
+        background-color: white;
+        border: 2px solid #BFA76F; 
+        border-radius: 10px;
+        margin: 20px;
+        overflow: hidden;
+        color: black;
+        transition: 0.3s;
+    }
+
+        .car-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 8px 20px rgba(0,0,0,0.2);
+        }
+
+        .car-card img {
+            width: 100%;
+            height: 180px;
+            object-fit: cover;
+        }
+
+    .car-info {
+        padding: 15px;
+        color: black; 
+        font-size: 20px;
+    }
+
+        .car-info h3 {
+            color: #BFA76F;
+            font-size: 20px;
+        }
+
+    .cars-container {
+        display: grid;
+        gap: 20px;
+        grid-template-columns: repeat(5, 1fr);
+    }
+
+    .overlay {
+        position: fixed;
+        top: 0;
+        left: 0;
+        width: 100vw;
+        height: 100vh;
+        background: rgba(0, 0, 0, 0.6);
+        display: none;
+        justify-content: center;
+        align-items: center;
+        z-index: 50000;
+    }
+
+    .popup-box {
+        width: 70%;
+        height: 70%;
+        background: white;
+        border-radius: 10px;
+        position: relative;
+        padding: 20px;
+        display: flex;
+    }
+
+    .close-btn {
+        position: absolute;
+        right: 20px;
+        top: 10px;
+        font-size: 35px;
+        cursor: pointer;
+        color: #0B0B0B;
+    }
+
+    .popup-content {
+        display: flex;
+        gap: 30px;
+        width: 100%;
+        height: 100%;
+        box-sizing: border-box;
+        align-items: center;
+    }
+
+    .popup-image-container {
+        width: 580px;
+        height: 500px;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        overflow: hidden;
+        border-radius: 10px;
+        border: 2px solid #BFA76F; 
+        flex-shrink: 0;
+    }
+
+        .popup-image-container img {
+            max-width: 100%;
+            max-height: 100%;
+            object-fit: contain;
+        }
+
+    .popup-details {
+        flex: 1;
+        font-size: 18px;
+        color: #0B0B0B;
+    }
+
+    .rent-btn {
+        margin-top: 20px;
+        padding: 12px 25px;
+        background-color: #BFA76F; 
+        color: black;
+        border: none;
+        border-radius: 8px;
+        font-size: 18px;
+        cursor: pointer;
+        transition: 0.2s;
+    }
+
+        .rent-btn:hover {
+            background-color: #D7C895; 
+            transform: scale(1.05);
+        }
+
+    .rent-popup {
+        position: fixed;
+        background: white;
+        border: 2px solid #BFA76F; 
+        border-radius: 10px;
+        padding: 15px;
+        width: 600px;
+        height: 70%;
+        display: none;
+        z-index: 99999;
+        pointer-events: auto;
+    }
+
+        .rent-popup label {
+            margin-top: 12px;
+            display: block;
+            color: #0B0B0B;
+        }
+
+    .rent-input {
+        background: white;
+        color: #0B0B0B;
+        border: 1px solid #BFA76F;
+        border-radius: 8px;
+        font-size: 16px;
+        padding: 7px;
+        margin-top: 10px;
+    }
+
+    .dropdown-group {
+        display: flex;
+        gap: 15px;
+        flex: 1;
+    }
+
+    .saverent-btn {
+        background-color: #BFA76F;
+        color: black;
+        font-size: 17px;
+        border: 1px solid #BFA76F;
+        padding: 7px 20px;
+        border-radius: 6px;
+        cursor: pointer;
+    }
+
+        .saverent-btn:hover {
+            background-color: #D7C895;
+        }
+
+    #saverentButton,
+    #cancelrentButton {
+        position: absolute;
+        bottom: 20px;
+        right: 20px;
+    }
+
+    #saverentButton {
+        right: 140px;
+    }
+
+    .contactus-container {
+        background-color: white;
+        color: #0B0B0B;
+        font-size: 20px;
+        padding: 10px;
+        border: 1px solid #BFA76F;
+        border-radius: 10px;
+    }
+
+        .contactus-container a {
+            color: #BFA76F;
+            font-weight: bold;
+        }
+</style>
+
+<!--Topbar-->
+<div class="topbar">
+    <div class="website-name">Youssef <a style="color: #BFA76F">AutoHub</a></div>
+    <div class="action-container">
+        <i id="showcars" class="action-btn" onclick="showcars()">Cars</i>
+        <i id="location" class="action-btn">Location</i>
+        <i id="about" class="action-btn" onclick="showabout()">About Us</i>
+        <i id="contactus" class="action-btn" onclick="showcontact()">Contact Us</i>
+    </div>
+</div>
+
+<!--Hero Section-->
+<div class="hero" style="margin-bottom: 50px;">
+    <div class="hero-left">
+        <h1>Drive Your Dream Car</h1>
+        <h3 style="color: #BFA76F">Where only luxury and sport meets.</h3>
+    </div>
+    <div class="hero-right"></div>
+    <img style="position:absolute; width:70%; right:0; pointer-events: none;" src="https://platform.cstatic-images.com/in/v2/stock_photos/702b874a-ab7c-4870-8561-63f0b8a2b7c9/abda99e8-6031-4161-aa5c-a516163231ae.png">
+</div>
+
+<!--Car Filter-->
+<div class="search-wrapper" style="margin-bottom: 50px">
+    <input type="text" id="carSearch" class="search-input" placeholder="Search for a car..." onkeyup="searchCars()">
+</div>
+
+<!--Cars-->
+<div id="cars-section" class="cars-container">
+    @foreach (var car in Model)
+    {
+        <div class="car-card"
+             onclick="openPopup(
+        @car.Id,
+        '@car.Image_Url',
+        '@car.Brand',
+        '@car.Model',
+        '@car.Year',
+        '@car.Type',
+        '@car.Description',
+        '@car.ExteriorColor',
+        '@car.InteriorColor',
+        '@car.PricePerDay'
+        )">
+
+
+            <img src="@car.Image_Url" alt="@car.Model" />
+            <div class="car-info">
+                <h3>@car.Brand @car.Model</h3>
+                <p><strong>Year:</strong> @car.Year</p>
+                <p><strong>Type:</strong> @car.Type</p>
+                <p><strong>Info:</strong> @car.Description</p>
+            </div>
+        </div>
+    }
+</div>
+
+<!--Popup-->
+<div id="carPopup" class="overlay">
+    <div class="popup-box">
+        <span class="close-btn" onclick="closePopup()">x</span>
+
+        <div class="popup-content">
+            <div class="popup-image-container">
+                <img id="popupCarImage" src="" />
+            </div>
+
+            <div class="popup-details">
+                <h2 id="popupCarTitle"></h2>
+                <p><strong>Year:</strong> <span id="popupCarYear"></span></p>
+                <p><strong>Type:</strong> <span id="popupCarType"></span></p>
+                <p><strong>Description:</strong> <span id="popupCarDesc"></span></p>
+                <p><strong>Exterior Color:</strong> <span id="popupCarExterior"></span></p>
+                <p><strong>Interior Color:</strong> <span id="popupCarInterior"></span></p>
+                <p><strong>Price/Day:</strong> <span id="popupCarPrice"></span></p>
+
+                <button id="rentButton" class="rent-btn" onclick="toggleRentPopup()">Rent Now</button>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!--Rent Popup-->
+<div class="rent-popup" id="rentpopup">
+    <span class="close-btn" onclick="closeRentPopup()">x</span>
+    <h3>Enter some information to complete the rent.</h3>
+    <hr />
+
+    <div>
+        <label><b>Full Name</b></label>
+        <input type="text" class="rent-input" placeholder="Enter full name" id="fullname" required />
+
+        <label><b>Phone Number</b></label>
+        <input type="tel" class="rent-input" placeholder="Enter your phone number" id="phonenumber" required />
+    </div>
+
+    <div>
+        <label><b>Birthdate</b></label>
+        <div class="dropdown-group">
+            <div>
+                <label><b>Day:</b></label>
+                <select id="day" required>
+                    <option value="">Select Day</option>
+                    @for (int i = 1; i <= 31; i++)
+                    {
+                        <option>@i</option>
+                    }
+                </select>
+            </div>
+
+            <div>
+                <label><b>Month:</b></label>
+                <select id="month" required>
+                    <option value="">Select Month:</option>
+                    <option value="1">January</option>
+                    <option value="2">February</option>
+                    <option value="3">March</option>
+                    <option value="4">Apr</option>
+                    <option value="5">May</option>
+                    <option value="6">Jun</option>
+                    <option value="7">Jul</option>
+                    <option value="8">Aug</option>
+                    <option value="9">Sep</option>
+                    <option value="10">Oct</option>
+                    <option value="11">Nov</option>
+                    <option value="12">Dec</option>
+                </select>
+            </div>
+
+            <div>
+                <label><b>Year:</b></label>
+                <select id="year" required>
+                    <option value="">Select Year</option>
+                    @for (int i = 1950; i <= DateTime.Now.Year; i++)
+                    {
+                        <option>@i</option>
+                    }
+                </select>
+            </div>
+        </div>
+    </div>
+
+    <div>
+        <label><b>Rental Dates</b></label>
+        <div class="dropdown-group">
+            <div style="flex:1;">
+                <label>From:</label>
+                <input type="date" id="startDate" class="rent-input">
+            </div>
+
+            <div style="flex:1%;">
+                <label>To:</label>
+                <input type="date" id="endDate" class="rent-input">
+            </div>
+        </div>
+    </div>
+
+    <div>
+        <button id="saverentButton" class="saverent-btn">Save</button>
+        <button id="cancelrentButton" class="saverent-btn" onclick="closeRentPopup()">Cancel</button>
+    </div>
+</div>
+
+<div id="aboutus-section" class="contactus-container" style="margin-bottom: 50px;">
+    <h1 style="color:#BFA76F;">About Us</h1>
+    <hr style="border-color:#BFA76F;">
+
+    <p style="color:#0B0B0B;">
+        Welcome to <strong style="color:#BFA76F; font-style:italic;">Youssef AutoHub</strong>,
+        your trusted destination for both <strong style="color:#BFA76F;">car rentals</strong> and
+        <strong style="color:#BFA76F;">car purchases</strong>.
+        We offer a diverse selection of high-quality, well-maintained vehicles to meet all lifestyles
+        — whether you're renting for a trip or looking to own your dream car.
+    </p>
+
+    <p style="color:#0B0B0B;">
+        At Youssef AutoHub, we believe in reliability, transparency, and customer satisfaction.
+        Every vehicle is carefully inspected and presented with accurate details and real photos,
+        ensuring complete trust and peace of mind with every choice you make.
+    </p>
+
+    <p style="color:#0B0B0B;">
+        With years of expertise in the automotive industry, our mission is to provide a smooth, luxurious,
+        and hassle-free experience from the moment you visit our platform until the moment you drive your car.
+    </p>
+</div>
+<div id="contactus-section" class="contactus-container">
+    <h2 style="color:#BFA76F;">Contact Us</h2>
+    <hr style="border-color:#BFA76F;">
+
+    <p style="color:#0B0B0B;">
+        For bookings, inquiries, or support, our team at
+        <strong style="color:#BFA76F;">Youssef AutoHub</strong> is always ready to assist you.
+        Reach us through any of the communication channels below — we respond quickly and professionally.
+    </p>
+
+    <p style="color:#0B0B0B; line-height:1.8;">
+        <strong style="color:#0B0B0B;">Phone:</strong>
+        <a href="tel:+96181909618" style="color:#BFA76F;">+961 81 909 618</a><br>
+
+        <strong style="color:#0B0B0B;">Email:</strong>
+        <a href="mailto:info@youssefautohub.com" style="color:#BFA76F;">info@youssefautohub.com</a><br>
+
+        <strong style="color:#0B0B0B;">WhatsApp:</strong>
+        <a href="https://wa.me/96181909618" target="_blank" style="color:#BFA76F;">Chat on WhatsApp</a><br>
+
+        <strong style="color:#0B0B0B;">Instagram:</strong>
+        <a href="https://instagram.com/youssef_mhanna_" target="_blank" style="color:#BFA76F;">youssefautohub</a><br>
+
+        <strong style="color:#0B0B0B;">Facebook:</strong>
+        <a href="https://facebook.com/youssefautohub" target="_blank" style="color:#BFA76F;">Youssef AutoHub</a>
+    </p>
+
+    <p style="color:#0B0B0B;">
+        We’re here to help you every step of the way — from choosing your car to completing your booking.
+    </p>
+</div>
+
+
+<script>
+    function showcars() {
+        const show = document.getElementById("cars-section")
+        show.scrollIntoView({ behavior: 'smooth' })
+    }
+
+    function showabout() {
+        const about = document.getElementById("aboutus-section")
+        about.scrollIntoView({ behavior: 'smooth'})
+    }
+
+    function showcontact() {
+        const contact = document.getElementById("contactus-section")
+        contact.scrollIntoView({ behavior: 'smooth' })
+    }
+
+    function searchCars() {
+        const input = document.getElementById("carSearch").value.toLowerCase();
+        const cards = document.querySelectorAll(".car-card");
+
+        cards.forEach(card => {
+            const text = card.innerText.toLowerCase();
+
+            if (text.includes(input)) {
+                card.style.display = "block";
+            } else {
+                card.style.display = "none";
+            }
+        });
+    }
+
+    function openPopup(carId, imageUrl, brand, model, year, type, desc, exterior, interior, pricePerDay) {
+
+        window.selectedCarId = carId;  
+
+        document.getElementById("popupCarImage").src = imageUrl;
+        document.getElementById("popupCarTitle").innerText = brand + " " + model;
+        document.getElementById("popupCarYear").innerText = year;
+        document.getElementById("popupCarType").innerText = type;
+        document.getElementById("popupCarDesc").innerText = desc;
+        document.getElementById("popupCarExterior").innerText = exterior;
+        document.getElementById("popupCarInterior").innerText = interior;
+        document.getElementById("popupCarPrice").innerText = pricePerDay + " $/day";
+
+        document.getElementById("carPopup").style.display = "flex";
+    }
+
+    function closePopup() {
+        document.getElementById("carPopup").style.display = "none";
+    }
+
+    function toggleRentPopup() {
+        const btn = document.getElementById("rentButton");
+        const popup = document.getElementById("rentpopup");
+
+        if (popup.style.display === "block") {
+            popup.style.display = "none";
+            return;
+        }
+
+        popup.style.display = "block";
+
+        const rect = btn.getBoundingClientRect();
+
+        popup.style.top = (rect.top - 570) + "px";
+        popup.style.left = (rect.left + rect.width + 30) + "px";
+    }
+
+    function closeRentPopup() {
+        document.getElementById("rentpopup").style.display = "none";
+    }
+
+    function resetRentForm() {
+        document.getElementById("fullname").value = "";
+        document.getElementById("phonenumber").value = "";
+        document.getElementById("day").value = "";
+        document.getElementById("month").value = "";
+        document.getElementById("year").value = "";
+        document.getElementById("startDate").value = "";
+        document.getElementById("endDate").value = "";
+    }
+
+        document.getElementById("saverentButton").onclick = function () {
+
+        const fullName = document.getElementById("fullname").value;
+        const phone = document.getElementById("phonenumber").value;
+
+        const day = document.getElementById("day").value;
+        const month = document.getElementById("month").value;
+        const year = document.getElementById("year").value;
+
+        const startDate = document.getElementById("startDate").value;
+        const endDate = document.getElementById("endDate").value;
+
+        // Build yyyy-MM-dd manually (SAFE)
+        const birthdate = `${year}-${month.padStart(2, '0')}-${day.padStart(2, '0')}`;
+
+        const rentData = {
+        FullName: fullName,
+        PhoneNumber: phone,
+        Birthdate: new Date(birthdate).toISOString(),
+        StartDate: new Date(startDate).toISOString(),
+        EndDate: new Date(endDate).toISOString(),
+        Car_Id: window.selectedCarId
+        };
+
+        fetch('/Customer/SaveRent', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify(rentData)
+    })
+    .then(res => res.json())
+    .then(response => {
+
+        console.log("DEBUG RESPONSE:", response);
+
+        if (response.success !== true) {
+            alert(response.message);
+            return;
+        }
+
+        resetRentForm();
+        closeRentPopup();
+    });
+
+    };
+</script>

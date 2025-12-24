@@ -1,0 +1,153 @@
+﻿<style>
+    
+    /*sidebar*/
+    .sidebar {
+        background-color: #0F172A;
+        color: white;
+        width: 300px;
+        top: 0;
+        left: 0;
+        bottom: 0;
+        position: fixed;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+    }
+
+    .sidebar-name {
+        font-size: 30px;
+        font-weight: bold;
+        font-style: italic;
+        padding: 30px 20px;
+    }
+
+    .sidebar-actions {
+        margin-top: 120px;
+        width: 100%;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        gap: 10px;
+    }
+
+    .sidebar-action-btns {
+        display: flex;
+        align-items: center;
+        justify-content: flex-start;
+        gap: 14px;
+        color: white;
+        background: #0F172A;
+        border: 1px solid #1E293B;
+        padding: 12px 16px;
+        width: 75%;
+        font-size: 16px;
+        font-weight: bold;
+        cursor: pointer;
+        border-radius: 8px;
+        transition: 0.2s;
+        text-decoration: none;
+        text-align: left;
+    }
+
+        .sidebar-action-btns:hover {
+            background-color: #2563EB;
+            border-left: 4px solid white;
+        }
+
+    .content {
+        margin-left: 320px; /* sidebar width + spacing */
+        padding: 30px;
+    }
+
+    #calendar {
+        background: white;
+        border-radius: 12px;
+        padding: 20px;
+        box-shadow: 0 6px 16px rgba(0,0,0,0.2);
+    }
+
+    /* rental bar */
+    .fc-event {
+        background-color: #0EA5E9 !important; /* blue */
+        border: none !important;
+        height: 30px; /* thin line */
+        border-radius: 999px;
+        margin-top: 18px;
+    }
+
+    /* optional: hide text if you want line only */
+    .fc-event-title {
+        font-size: 11px;
+        color: white;
+        text-align: left;
+        padding: 10px;
+        
+    }
+
+</style>
+
+<!-- Sidebar -->
+<div class="sidebar">
+    <div class="sidebar-name"> <a style="color: Blue">Y</a>oussef <a style="color:blue">A</a>uto<a style="color: Blue">H</a>ub</div>
+
+    <div class="sidebar-actions">
+        <a href="/Admin/Admin" class="sidebar-action-btns"> <i data-lucide="layout-dashboard"></i> Dashboard</a>
+        <a href="/Admin/Cars" class="sidebar-action-btns"> <i data-lucide="car-front"></i> Cars</a>
+        <a href="/Admin/Customers" class="sidebar-action-btns"><i data-lucide="users"></i>Customers</a>
+        <a href="/Admin/RentRequest" class="sidebar-action-btns"><i data-lucide="clipboard-list"></i>Rent Requests</a>
+        <a href="/Admin/Calendar" class="sidebar-action-btns"><i data-lucide="calendar"></i>Calendar</a>
+        <a href="/Admin/WebsiteContent" class="sidebar-action-btns"><i data-lucide="globe"></i>Website Content</a>
+        <a href="/Admin/Settings" class="sidebar-action-btns"><i data-lucide="settings"></i>Settings</a>
+    </div>
+</div>
+
+<div class="content">
+    <div id="calendar"></div>
+</div>
+
+
+
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/fullcalendar@6.1.11/index.global.min.css">
+<script src="https://cdn.jsdelivr.net/npm/fullcalendar@6.1.11/index.global.min.js"></script>
+
+
+<script src="https://unpkg.com/lucide@latest"></script>
+<script>
+
+    lucide.createIcons();
+
+        document.addEventListener("DOMContentLoaded", function () {
+        const calendarEl = document.getElementById("calendar");
+
+        const calendar = new FullCalendar.Calendar(calendarEl, {
+            initialView: "dayGridMonth",
+            height: "auto",
+
+            events: [
+                {
+                    title: "BMW X5",
+                    start: "2026-01-07",
+                    end: "2026-01-12"
+                },
+                {
+                    title: "Mercedes C-Class",
+                    start: "2026-01-12",
+                    end: "2026-01-16"
+                },
+                {
+                    title: "Range Rover",
+                    start: "2026-01-23",
+                    end: "2026-01-26"
+                },
+                {
+                    title: "Porsche 911",
+                    start: "2026-01-27",
+                    end: "2026-01-30"
+                }
+            ]
+        });
+
+        calendar.render();
+    });
+
+</script>

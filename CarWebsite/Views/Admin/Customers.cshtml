@@ -1,0 +1,212 @@
+﻿<style>
+
+    /*sidebar*/
+    .sidebar {
+        background-color: #0F172A;
+        color: white;
+        width: 300px;
+        top: 0;
+        left: 0;
+        bottom: 0;
+        position: fixed;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+    }
+
+    .sidebar-name {
+        font-size: 30px;
+        font-weight: bold;
+        font-style: italic;
+        padding: 30px 20px;
+    }
+
+    .sidebar-actions {
+        margin-top: 120px;
+        width: 100%;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        gap: 10px;
+    }
+
+    .sidebar-action-btns {
+        display: flex;
+        align-items: center;
+        justify-content: flex-start;
+        gap: 14px;
+        color: white;
+        background: #0F172A;
+        border: 1px solid #1E293B;
+        padding: 12px 16px;
+        width: 85%;
+        font-size: 16px;
+        font-weight: bold;
+        cursor: pointer;
+        border-radius: 8px;
+        transition: 0.2s;
+        text-decoration: none;
+        text-align: left;
+    }
+
+        .sidebar-action-btns:hover {
+            background-color: #2563EB;
+            border-left: 4px solid white;
+        }
+
+    /*stats table*/
+    .stats-table {
+        background-color: white;
+        border: 1px solid #0F172A;
+        border-radius: 12px;
+        margin-left: 450px;
+        margin-top: 70px;
+        padding: 20px 30px;
+        width: 65%;
+        height: 90px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        box-shadow: 0 3px 6px rgba(0,0,0,0.2);
+    }
+
+        .stats-table:hover {
+            transform: translateY(-6px);
+            box-shadow: 0 6px 15px rgba(0,0,0,0.3);
+        }
+    
+    .stats-box {
+        display: flex;
+        flex: 1;
+        justify-content: center;
+        align-items: center;
+        color: #0F172A;
+        font-size: 22px;
+        font-weight: bold;
+    }
+
+    /*Search*/
+    .search-container {
+        display: flex;
+        margin-left: 440px;
+        margin-top: 120px;
+        padding: 30px;
+        justify-content: space-between;
+    }
+
+    .search {
+        width: 550px;
+        height: 50px;
+        padding: 10px 20px;
+        border: 1px solid #0F172A;
+        border-radius: 12px;
+        font-size: 16px;
+        box-shadow: 0px 6px 3px rgba(0,0,0,0.3);
+    }
+
+    .addcust-btn {
+        display: flex;
+        gap: 10px;
+        border: 1px solid blue;
+        background-color: #0F172A;
+        color: white;
+        box-shadow: 0px 6px 3px rgba(0,0,0,0.3);
+        padding: 10px;
+        margin-right: 100px;
+        justify-content: center;
+        align-items: center;
+        font-size: 18px;
+        cursor: pointer;
+    }
+
+        .addcust-btn:hover {
+            background-color: blue;
+            border: 1px solid #0F172A;
+            border-radius: 12px;
+            transform: scale(1.05);
+        }
+
+    /*Table*/
+    .table-container {
+        margin-left: 320px;
+        padding: 30px;
+        margin-top: 30px;
+    }
+        .table-container:hover {
+            transform: translateY(-6px);
+            box-shadow: 0 6px 15px rgba(0,0,0,0.3);
+        }
+
+    table {
+        width: 100%;
+        border-collapse: collapse;
+    }
+
+    th {
+        text-align: left;
+        padding: 12px;
+    }
+
+    td {
+        padding: 12px;
+    }
+
+    /*Add Customer Popup*/
+    
+ </style>
+
+
+<!-- Sidebar -->
+<div class="sidebar">
+    <div class="sidebar-name"> <a style="color: Blue">Y</a>oussef <a style="color:blue">A</a>uto<a style="color: Blue">H</a>ub</div>
+
+    <div class="sidebar-actions">
+        <a href="/Admin/Admin" class="sidebar-action-btns"> <i data-lucide="layout-dashboard"></i> Dashboard</a>
+        <a href="/Admin/Cars" class="sidebar-action-btns"> <i data-lucide="car-front"></i> Cars</a>
+        <a href="/Admin/Customers" class="sidebar-action-btns"><i data-lucide="users"></i>Customers</a>
+        <a href="/Admin/RentRequest" class="sidebar-action-btns"><i data-lucide="clipboard-list"></i>Rent Requests</a>
+        <a href="/Admin/Calendar" class="sidebar-action-btns"><i data-lucide="calendar"></i>Calendar</a>
+        <a href="/Admin/WebsiteContent" class="sidebar-action-btns"><i data-lucide="globe"></i>Website Content</a>
+        <a href="/Admin/Settings" class="sidebar-action-btns"><i data-lucide="settings"></i>Settings</a>
+    </div>
+</div>
+
+<!--stats Table-->
+<div class="stats-table">
+    <div class="stats-box">Total visitors: <span id="visitors">0</span></div>
+    <div class="stats-box">Total Customers: <span id="customers">0</span></div>
+    <div class="stats-box">Active Rentals: <span id="activerentals">0</span></div>
+    <div class="stats-box">New This Month: <span id="newthismonth">0</span></div>
+</div>
+
+<!--Search-->
+<div class="search-container">
+    <input class="search" placeholder="Search for a Customer ..." />
+</div>
+
+<!--Table-->
+<div class="table-container">
+    <table>
+        <thead>
+            <tr>
+                <th>Customer</th>
+                <th>Phone</th>
+                <th>Rentals</th>
+                <th>Status</th>
+                <th>Last Rental</th>
+                <th>Actions</th>
+            </tr>
+        </thead>
+    </table>
+</div>
+
+
+
+
+<script src="https://unpkg.com/lucide@latest"></script>
+
+<script>
+
+    lucide.createIcons();
+
+</script>

@@ -1,0 +1,746 @@
+﻿<style>
+    /* Sidebar */
+    .sidebar {
+        background-color: #0F172A;
+        color: white;
+        width: 300px;
+        top: 0;
+        left: 0;
+        bottom: 0;
+        position: fixed;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+    }
+
+    .sidebar-name {
+        font-size: 30px;
+        font-weight: bold;
+        font-style: italic;
+        padding: 30px 20px;
+    }
+
+    .sidebar-actions {
+        margin-top: 120px;
+        width: 100%;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        gap: 10px;
+    }
+
+    .sidebar-action-btns {
+        display: flex;
+        align-items: center;
+        justify-content: flex-start;
+        gap: 14px;
+        color: white;
+        background: #0F172A;
+        border: 1px solid #1E293B;
+        padding: 12px 16px;
+        width: 75%;
+        font-size: 16px;
+        font-weight: bold;
+        cursor: pointer;
+        border-radius: 8px;
+        transition: 0.2s;
+        text-decoration: none;
+        text-align: left;
+    }
+
+        .sidebar-action-btns:hover {
+            background-color: #2563EB;
+            border-left: 4px solid white;
+        }
+
+    /*Statistics*/
+    .stats-table {
+        background-color: white;
+        border: 1px solid #0F172A;
+        border-radius: 12px;
+        margin-left: 450px;
+        margin-top: 70px;
+        padding: 20px 30px;
+        width: 65%;
+        height: 90px;
+        display: flex;
+        gap: 40px;
+        align-items: center;
+        justify-content: center;
+        box-shadow: 0 3px 6px rgba(0,0,0,0.2);
+    }
+
+    .stats-table:hover{
+        transform: translateY(-6px);
+        box-shadow: 0 6px 15px rgba(0,0,0,0.3);
+    }
+
+    .stats-box {
+        flex: 1;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        color: #0F172A;
+        font-size: 22px;
+        font-weight: bold;
+    }
+
+    /*Search*/
+    .search-container {
+        margin-left: 440px;
+        margin-top: 120px;
+        padding: 0 30px;
+        display: flex;
+        align-items: center;
+        gap: 600px;
+    }
+
+    .search {
+        height: 50px;
+        width: 550px;
+        background-color: white;
+        border: 1px solid #0F172A;
+        border-radius: 12px;
+        padding: 0 16px;
+        font-size: 16px;
+        color: #0F172A;
+        box-shadow: 0 3px 6px rgba(0,0,0,0.2);
+    }
+
+    .addcar-btn {
+        height: 50px;
+        padding: 0 20px;
+        background-color: #0F172A;
+        color: white;
+        border: none;
+        border-radius: 12px;
+        font-size: 16px;
+        cursor: pointer;
+        display: flex;
+        align-items: center;
+        gap: 8px;
+    }
+        .addcar-btn:hover {
+            background-color: blue;
+            border: 1px solid #0F172A;
+            border-radius: 12px;
+            transform: scale(1.05);
+        }
+
+    /* Cars Table */
+    .table-container {
+        margin-left: 320px;
+        padding: 30px;
+        margin-top: 30px;
+    }
+
+    .table-container:hover {
+            transform: translateY(-6px);
+            box-shadow: 0 6px 15px rgba(0,0,0,0.3);
+    }
+
+    table {
+        width: 100%;
+        border-collapse: collapse;
+    }
+
+    th {
+        text-align: left;
+        padding: 12px;
+        border-bottom: 1px solid #ddd;
+    }
+
+    td {
+        padding: 12px;
+    }
+
+    .car-cell {
+        display: flex;
+        align-items: center;
+        gap: 12px;
+    }
+
+        .car-cell img {
+            width: 50px;
+            height: 35px;
+            border-radius: 6px;
+            object-fit: cover;
+            background: #eee;
+        }
+
+    .available {
+        background: #d1fae5;
+        color: #065f46;
+        padding: 4px 10px;
+        border-radius: 12px;
+        font-size: 13px;
+        font-weight: bold;
+    }
+
+    .rented {
+        background: #fee2e2;
+        color: #991b1b;
+        padding: 4px 10px;
+        border-radius: 12px;
+        font-size: 13px;
+        font-weight: bold;
+    }
+
+    .actions {
+        cursor: pointer;
+    }
+
+    /*Add car*/
+    .overlay {
+        position: fixed;
+        inset: 0; /* top,right,bottom,left = 0 */
+        background: rgba(0, 0, 0, 0.4);
+        backdrop-filter: blur(5px);
+        display: none; 
+        z-index: 999;
+        justify-content: center; 
+        align-items: center; 
+    }
+
+    .close-overlay {
+        position: absolute;
+        top: 12px;
+        right: 12px;
+        background: transparent;
+        cursor: pointer;
+        color: #0F172A;
+        border: none;
+    }
+
+    .popup {
+        position: relative;
+        height: 65%;
+        width: 40%;
+        background-color: white;
+        border: 1px solid #0F172A;
+        border-radius: 10px;
+        padding: 15px;
+        box-shadow: 0 3px 6px #0F172A; 
+    }
+
+    .popup h2 {
+        font-style: italic;
+        font-weight: bold;
+        padding: 10px 20px;
+        color: #0F172A;
+        font-size: 30px;
+    }
+
+    .popup-body {
+        flex: 1;
+        display: flex;
+        flex-direction: column;
+        gap: 12px;
+        padding-right: 5px;
+        margin-top: 20px;
+    }
+
+    .form-row {
+        display: flex;
+        gap: 12px;
+        margin-bottom: 15px;
+    }
+
+    select,
+    input,
+    textarea {
+        width: 100%;
+        padding: 10px;
+        border: 1px solid #0F172A;
+        border-radius: 8px;
+        font-size: 20px;
+    }
+
+    .popup-footer {
+        display: flex;
+        justify-content: flex-end;
+        gap: 12px;
+        margin-top: 50px;
+    }
+    
+    .cancel-button {
+        padding: 10px 22px;
+        border-radius: 8px;
+        border: 1px solid #0F172A;
+        background: white;
+        color: #0F172A;
+        cursor: pointer;
+        font-size: 16px;
+    }
+
+    .save-button {
+        padding: 10px 22px;
+        border-radius: 8px;
+        border: none;
+        background: #0F172A;
+        color: white;
+        cursor: pointer;
+        font-size: 16px;
+    }
+        .save-button:hover {
+            background: blue;
+        }
+    
+    /*View Car Popup*/
+    .overlay {
+        position: fixed;
+        inset: 0;
+        background: rgba(0, 0, 0, 0.6);
+        display: none;
+        justify-content: center;
+        align-items: center;
+        z-index: 50000;
+    }
+
+
+    .popup-box {
+        width: 70%;
+        height: 70%;
+        background: white;
+        border-radius: 10px;
+        position: relative;
+        padding: 20px;
+        display: flex;
+    }
+
+    .close-btn {
+        position: absolute;
+        top: 14px;
+        right: 18px;
+        font-size: 22px;
+        cursor: pointer;
+        color: #6B7280;
+    }
+
+        .close-btn:hover {
+            color: #0F172A;
+        }
+
+
+    .popup-content {
+        display: grid;
+        grid-template-columns: 1fr 1fr;
+        gap: 40px;
+        width: 100%;
+        height: 100%;
+        align-items: center;
+    }
+
+    .popup-image-container {
+        width: 100%;
+        height: 420px;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        overflow: hidden;
+        border-radius: 12px;
+        border: 1px solid #E5E7EB;
+        background: #F8FAFC;
+    }
+
+
+        .popup-image-container img {
+            max-width: 100%;
+            max-height: 100%;
+            object-fit: contain;
+        }
+
+    .popup-details {
+        font-size: 16px;
+        color: #374151;
+    }
+
+        .popup-details h2 {
+            font-size: 28px;
+            margin-bottom: 16px;
+            color: #0F172A;
+        }
+
+        .popup-details p {
+            margin: 6px 0;
+        }
+
+        .popup-details strong {
+            color: #0F172A;
+        }
+
+
+    /*Toast Message*/
+    .toast {
+        position: fixed;
+        bottom: 30px;
+        left: 30px;
+        width: 420px; 
+        min-height: 120px;
+        background: #B7BBC3;
+        color: #0F172A; /* better contrast */
+        padding: 16px 22px;
+        border-radius: 10px;
+        display: flex;
+        align-items: center;
+        gap: 12px;
+        font-size: 24px;
+        opacity: 0;
+        transform: translateX(-30px); /*slide in*/
+        pointer-events: none;
+        transition: opacity 0.4s ease, transform 0.4s ease;
+        z-index: 9999;
+    }
+
+        .toast.show {
+            opacity: 1; /*Fade in*/
+            transform: translateX(0);
+        }
+
+</style>
+
+<!-- Sidebar -->
+<div class="sidebar">
+    <div class="sidebar-name"> <a style="color: Blue">Y</a>oussef <a style="color:blue">A</a>uto<a style="color: Blue">H</a>ub</div>
+
+    <div class="sidebar-actions">
+        <a href="/Admin/Admin" class="sidebar-action-btns"> <i data-lucide="layout-dashboard"></i> Dashboard</a>
+        <a href="/Admin/Cars" class="sidebar-action-btns"> <i data-lucide="car-front"></i> Cars</a>
+        <a href="/Admin/Customers" class="sidebar-action-btns"><i data-lucide="users"></i>Customers</a>
+        <a href="/Admin/RentRequest" class="sidebar-action-btns"><i data-lucide="clipboard-list"></i>Rent Requests</a>
+        <a href="/Admin/Calendar" class="sidebar-action-btns"><i data-lucide="calendar"></i>Calendar</a>
+        <a href="/Admin/WebsiteContent" class="sidebar-action-btns"><i data-lucide="globe"></i>Website Content</a>
+        <a href="/Admin/Settings" class="sidebar-action-btns"><i data-lucide="settings"></i>Settings</a>
+    </div>
+</div>
+
+<!--stats table-->
+<div class="stats-table">
+    <div class="stats-box">Total Cars: <span id="totalCars">0</span></div>
+    <div class="stats-box">Available: <span id="availableCars">0</span></div>
+    <div class="stats-box">Rented: <span id="rentedCars">0</span></div>
+</div>
+
+<!--Search-->
+<div class="search-container">
+    <input class="search" placeholder="Search for a car ..." />
+    <button class="addcar-btn" onclick="openAddCarModal()"><i data-lucide="plus"></i>Add Car</button>
+</div>
+
+<!-- Cars Table -->
+<div class="table-container">
+    <table>
+        <thead>
+            <tr>
+                <th>Car</th>
+                <th>Plate</th>
+                <th>Status</th>
+                <th>Price / Day</th>
+                <th>Rental</th>
+                <th>Actions</th>
+            </tr>
+        </thead>
+        <tbody id="carsBody">
+            
+        </tbody>
+    </table>
+</div>
+
+<!--Add Car Popup-->
+<div id="overlay" class="overlay">
+    <div class="popup">
+        <button onclick="closeAddCarModal()" class="close-overlay"><i data-lucide="x" width="28" height="28"></i></button>
+        <h2>Add New Car</h2>
+        <hr />
+
+        <form id="addCarForm" class="popup-body" onsubmit="saveCar()">
+            <input type="file" name="image" accept="image/*" required>
+
+            <div class="form-row">
+                <input name="brand" placeholder="Brand" required>
+                <input name="model" placeholder="Model" required>
+            </div>
+
+            <div class="form-row">
+                <input type="number" name="year" placeholder="Year" required>
+                <input name="plateNumber" placeholder="Plate Number" required>
+            </div>
+
+            <div class="form-row">
+                <select name="Type" required>
+                    <option value="">Select Car Type</option>
+                    <option value="Sedan">Sedan</option>
+                    <option value="SUV">SUV</option>
+                    <option value="Hatchback">Hatchback</option>
+                    <option value="Coupe">Coupe</option>
+                    <option value="Pickup">Pickup</option>
+                </select>
+                <input type="number" name="pricePerDay" placeholder="Price / Day" required>
+            </div>
+
+            <div class="form-row">
+                <input name="exteriorColor" placeholder="Exterior Color" required>
+                <input name="interiorColor" placeholder="Interior Color" required>
+            </div>
+
+            <textarea rows="3" name="description" placeholder="Description" required></textarea>
+        </form>
+
+        <div class="popup-footer">
+            <button class="cancel-button" onclick="closeAddCarModal()">Cancel</button>
+            <button type="submit" class="save-button" onclick="saveCar()">Save Car</button>
+        </div>
+
+    </div>
+</div>
+
+<!--View Car-->
+<div id="carPopup" class="overlay">
+    <div class="popup-box">
+        <span class="close-btn" onclick="closePopup()">x</span>
+
+        <div class="popup-content">
+            <div class="popup-image-container">
+                <img id="popupCarImage" src="" />
+            </div>
+
+            <div class="popup-details">
+                <h2 id="popupCarTitle"></h2>
+                <p><strong>Year:</strong> <span id="popupCarYear"></span></p>
+                <p><strong>Type:</strong> <span id="popupCarType"></span></p>
+                <p><strong>Description:</strong> <span id="popupCarDesc"></span></p>
+                <p><strong>Exterior Color:</strong> <span id="popupCarExterior"></span></p>
+                <p><strong>Interior Color:</strong> <span id="popupCarInterior"></span></p>
+                <p><strong>Price/Day:</strong> <span id="popupCarPrice"></span></p>
+
+            </div>
+        </div>
+    </div>
+</div>
+
+<!--Edit Car-->
+<div id="overlay" class="overlay">
+    <div class="popup">
+        <button onclick="closeAddCarModal()" class="close-overlay"><i data-lucide="x" width="28" height="28"></i></button>
+        <h2>Add New Car</h2>
+        <hr />
+
+        <form id="addCarForm" class="popup-body" onsubmit="saveCar()">
+            <input type="file" name="image" accept="image/*" required>
+
+            <div class="form-row">
+                <input name="brand" placeholder="Brand" required>
+                <input name="model" placeholder="Model" required>
+            </div>
+
+            <div class="form-row">
+                <input type="number" name="year" placeholder="Year" required>
+                <input name="plateNumber" placeholder="Plate Number" required>
+            </div>
+
+            <div class="form-row">
+                <select name="Type" required>
+                    <option value="">Select Car Type</option>
+                    <option value="Sedan">Sedan</option>
+                    <option value="SUV">SUV</option>
+                    <option value="Hatchback">Hatchback</option>
+                    <option value="Coupe">Coupe</option>
+                    <option value="Pickup">Pickup</option>
+                </select>
+                <input type="number" name="pricePerDay" placeholder="Price / Day" required>
+            </div>
+
+            <div class="form-row">
+                <input name="exteriorColor" placeholder="Exterior Color" required>
+                <input name="interiorColor" placeholder="Interior Color" required>
+            </div>
+
+            <textarea rows="3" name="description" placeholder="Description" required></textarea>
+        </form>
+
+        <div class="popup-footer">
+            <button class="cancel-button" onclick="closeAddCarModal()">Cancel</button>
+            <button type="submit" class="save-button" onclick="saveCar()">Save</button>
+        </div>
+
+    </div>
+</div>
+
+<!--Toast-->
+<div id="toast" class="toast">
+    <span><i data-lucide="check"></i></span>
+    <span class="text"></span>
+</div>
+
+
+<script src="https://unpkg.com/lucide@latest"></script>
+<script>
+
+    lucide.createIcons();
+
+      fetch('/Admin/GetCars')
+        .then(r => r.json())
+        .then(cars => {
+          const totalCars = cars.length;
+          const rentedCars = cars.filter(c => c.isRented === true).length;
+          const availableCars = totalCars - rentedCars;
+
+          document.getElementById("totalCars").innerText = totalCars;
+          document.getElementById("rentedCars").innerText = rentedCars;
+          document.getElementById("availableCars").innerText = availableCars;
+
+          const searchInput = document.querySelector(".search");
+          searchInput.addEventListener("input", () => {
+              const value = searchInput.value.toLowerCase();
+              const rows = document.querySelectorAll("#carsBody tr");
+
+              rows.forEach(row => {
+                  const text = row.innerText.toLowerCase();
+                  row.style.display = text.includes(value) ? "" : "none"
+              });
+            });
+        
+
+          const body = document.getElementById("carsBody");
+          body.innerHTML = "";
+
+          cars.forEach(car => {
+            body.innerHTML += `
+              <tr>
+                <td class="car-cell">
+                  <img src="${car.image_Url ?? ''}">
+                  <div>
+                    <strong>${car.brand} ${car.model}</strong><br>
+                    <small>${car.year}</small>
+                  </div>
+                </td>
+                <td>${car.plateNumber ?? '-'}</td>
+                <td><span class="available">Available</span></td>
+                <td>$${car.pricePerDay}</td>
+                <td>—</td>
+                <td class="actions">
+                    <span style="cursor:pointer"
+                        onclick="openViewCarPopup(
+                            ${car.id},
+                            '${car.image_Url ?? ""}',
+                            '${car.brand}',
+                            '${car.model}',
+                            ${car.year},
+                            '${car.type ?? ""}',
+                            '${car.description ?? ""}',
+                            '${car.exteriorColor ?? ""}',
+                            '${car.interiorColor ?? ""}',
+                            ${car.pricePerDay}
+                        )">👁</span>
+                    <span onclick="openEditCarPopup(${JSON.stringify(car).replace(/"/g, '&quot;')})">✏</span>
+                    <span class="eye-icon" data-car='${JSON.stringify(car)}'>🗑</span>
+                </td>
+              </tr>
+            `;
+          });
+        });
+
+    function openAddCarModal() {
+        const overlay = document.getElementById("overlay");
+
+        if (overlay.style.display === "flex") {
+            overlay.style.display = "none";
+        } else {
+            overlay.style.display = "flex";
+        }
+    }
+    
+    function closeAddCarModal() {
+        const overlay = document.getElementById("overlay");
+
+        if (overlay.style.display === "flex") {
+            overlay.style.display = "none";
+        } 
+    }
+
+    function saveCar() {
+        const formData = new FormData();
+        const form = document.getElementById("addCarForm");
+
+        formData.append("Brand", document.querySelector('[name="brand"]').value);
+        formData.append("Model", document.querySelector('[name="model"]').value);
+        formData.append("Year", document.querySelector('[name="year"]').value);
+        formData.append("Type", document.querySelector('[name="Type"]').value);
+        formData.append("PricePerDay", document.querySelector('[name="pricePerDay"]').value);
+        formData.append("PlateNumber", document.querySelector('[name="plateNumber"]').value);
+        formData.append("Description", document.querySelector('[name="description"]').value);
+        formData.append("ExteriorColor", document.querySelector('[name="exteriorColor"]').value);
+        formData.append("InteriorColor", document.querySelector('[name="interiorColor"]').value);
+
+        if (!form.checkValidity()) {
+        form.reportValidity(); 
+        return; 
+    }
+
+        const fileInput = document.querySelector('input[type="file"][name="image"]');
+        if (fileInput && fileInput.files.length > 0) {
+            formData.append("Image", fileInput.files[0]);
+        }
+
+        fetch("/Admin/AddCar", {
+          method: "POST",
+          body: formData
+        })
+        .then(res => {
+            if (!res.ok) throw new Error();
+            showToast("New Car Added!");
+            form.reset();
+        })
+    
+    }
+
+    function openViewCarPopup(carId, imageUrl, brand, model, year, type, desc, exterior, interior, pricePerDay) {
+        window.selectedCarId = carId;
+
+        document.getElementById("popupCarImage").src = imageUrl;
+        document.getElementById("popupCarTitle").innerText = brand + " " + model;
+        document.getElementById("popupCarYear").innerText = year;
+        document.getElementById("popupCarType").innerText = type;
+        document.getElementById("popupCarDesc").innerText = desc;
+        document.getElementById("popupCarExterior").innerText = exterior;
+        document.getElementById("popupCarInterior").innerText = interior;
+        document.getElementById("popupCarPrice").innerText = pricePerDay + " $/day";
+
+        document.getElementById("carPopup").style.display = "flex";
+    }
+
+    function openEditCarPopup(car) {
+
+        window.editingCarId = car.id; // keep for update later
+
+        document.querySelector('[name="brand"]').value = car.brand;
+        document.querySelector('[name="model"]').value = car.model;
+        document.querySelector('[name="year"]').value = car.year;
+        document.querySelector('[name="plateNumber"]').value = car.plateNumber;
+        document.querySelector('[name="Type"]').value = car.type;
+        document.querySelector('[name="pricePerDay"]').value = car.pricePerDay;
+        document.querySelector('[name="exteriorColor"]').value = car.exteriorColor;
+        document.querySelector('[name="interiorColor"]').value = car.interiorColor;
+        document.querySelector('[name="description"]').value = car.description;
+
+        // image not required when editing
+        document.querySelector('[name="image"]').required = false;
+
+        // change title
+        document.querySelector("#overlay h2").innerText = "Edit Car";
+
+        // open modal
+        document.getElementById("overlay").style.display = "flex";
+    }
+
+    function showToast(message) {
+        const toast = document.getElementById("toast");
+        toast.querySelector(".text").textContent = message;
+
+        toast.classList.add("show");
+
+        setTimeout(() => {
+            toast.classList.remove("show");
+        }, 3000);
+    }
+</script>

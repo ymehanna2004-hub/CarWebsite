@@ -1,0 +1,486 @@
+﻿<style>
+
+    /*Sidebar*/
+    .sidebar {
+        background-color: #0F172A;
+        color: white;
+        width: 270px;
+        top: 0;
+        left: 0;
+        bottom: 0;
+        position: fixed;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+    }
+
+    .sidebar-name {
+        font-size: 30px;
+        font-weight: bold;
+        font-style: italic;
+        padding: 30px 20px;
+    }
+
+    .sidebar-actions {
+        margin-top: 120px;
+        width: 100%;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        gap: 10px;
+ 
+    }
+
+    .sidebar-action-btns {
+        display: flex;
+        align-items: center;
+        justify-content: flex-start;
+        gap: 14px;
+        color: white;
+        background: #0F172A;
+        border: 1px solid #1E293B;
+        padding: 12px 16px;
+        width: 75%;
+        font-size: 16px;
+        font-weight: bold;
+        cursor: pointer;
+        border-radius: 8px;
+        transition: 0.2s;
+        text-decoration: none;
+        text-align: left;
+    }
+
+        .sidebar-action-btns:hover {
+            background-color: #2563EB;
+            border-left: 4px solid white;
+        }
+
+    /*Cards */
+    .first-row-container {
+        display: grid;
+        grid-template-columns: auto 450px;
+        align-items: start;
+        gap: 30px;
+        margin-left: 270px;
+        padding: 30px;
+    }
+
+    .cards-container {
+        grid-column: 1;
+        display: grid;
+        grid-template-columns: repeat(2, 1fr);
+        gap: 20px;
+        width: 700px;
+        margin-left: 0;
+        padding: 0;
+    }
+
+    .card {
+        background: white;
+        border-radius: 14px;
+        padding: 20px;
+        height: 80px;
+        width: 350px;
+        box-shadow: 0 6px 16px rgba(0, 0, 0, 0.8);
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+    }
+
+    .best-rated-cars {
+        margin-top: -140px;
+        width: 740px;
+        grid-column: 1 / 3; 
+        grid-row: 3;
+        background: #fff;
+        border-radius: 14px;
+        padding: 20px 30px;
+        box-shadow: 0 6px 16px rgba(0, 0, 0, 0.8);
+    }
+
+    .card-info{
+        display: flex;
+        flex-direction: column;
+        gap: 6px;
+    }
+
+    .card-icon {
+        font-size: 22px;
+    }
+    .card-value{
+        font-size: 34px;
+        font-weight: 700;
+        color: #0F172A
+    }
+
+    .card-label {
+        font: 14px;
+        color: #6B7280;
+        font-weight: 500;
+    }
+    .card-ring {
+        width: 78px;
+        height: 78px;
+        border-radius: 50%;
+        border: 7px solid #E5E7EB;
+    }
+
+    /*pie chart*/
+    .pie-container {
+        margin-top: -150px;
+        margin-left: -400px;
+        grid-column: 2;
+        padding: 5px;
+        width: 450px;
+        height: 400px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+    }
+
+    .pie {
+        width: 270px;
+        height: 270px;
+        padding: 30px;
+        border-radius: 50%;
+
+        background: conic-gradient( #2563EB 0% 40%, /* SUV */
+        #22C55E 40% 65%, /* Sedan */
+        #FACC15 65% 85%, /* Coupe */
+        #EF4444 85% 100% /* Hatchback */
+        );
+        box-shadow: 0 6px 16px rgba(0,0,0,0.8);
+        
+    }
+
+
+    .activity-calendar-row {
+        margin-left: 270px;
+        padding: 30px;
+        display: grid;
+        grid-template-columns: repeat(3, 350px);
+        gap: 89px;
+        justify-content: start;
+    }
+    /*Recenet Activity*/
+    .recent-activity {
+        height: 430px;
+        background: #FFFFFF;
+        border-radius: 12px;
+        box-shadow: 0 6px 16px rgba(0, 0, 0, 0.8);
+    }
+
+    .recent-activity-title {
+        font-size: 20px;
+        font-weight: 700;
+        text-align: center;
+        padding: 5px;
+       
+    }
+
+    .recent-activity-info {
+        position: absolute;
+        overflow-y: auto;
+        font-size: 16px;
+    }
+
+    /*calendar*/
+    .calendar {
+        height: 400px;
+        background: #FFFFFF;
+        border-radius: 14px;
+        padding: 20px;
+        box-shadow: 0 6px 16px rgba(0,0,0,0.3);
+    }
+
+    .calendar-title {
+        display: flex;
+        text-align: center;
+        font-size: 20px;
+        font-weight: 700;
+    }
+
+    .calendar-body {
+        height: 350px;
+        border-radius: 12px;
+        background: #F1F5F9;
+    }
+
+    #calendar {
+        height: 100%;
+    }
+
+    /*Notes*/
+    .notes {
+        height: 430px;
+        background: #FFFFFF;
+        border-radius: 12px;
+        box-shadow: 0 6px 16px rgba(0, 0, 0, 0.8);
+        display: flex;
+        flex-direction: column;
+    }
+
+    .notes-title {
+        font-size: 20px;
+        font-weight: 700;
+        text-align: center;
+        padding: 10px;
+    }
+
+    .notes-info {
+        position: absolute;
+        overflow-y: auto;
+        font-size: 16px;
+    }
+
+    .notes-footer {
+        bottom: 0;
+        display: flex;
+        gap: 8px;
+        padding: 10px;
+        border-top: 1px solid #E5E7EB;
+        margin-top: auto;
+        justify-content: space-between;
+    }
+
+    .notes-footer input {
+        padding: 8px;
+        border-radius: 14px;
+        width: 70%;
+    }
+
+    .notes-footer button {
+        padding: 8px;
+        border-radius: 14px;
+        background-color: #0F172A;
+        color: white;
+        
+    }
+
+        .notes-footer button:hover {
+             background-color: #2563EB;
+        }
+
+    /*Charts*/
+    .charts {
+        margin-left: 270px;
+        margin-top: 10px;
+        padding: 30px;
+        display: grid;
+        grid-template-columns: repeat(2, 1fr);
+        height: 400px;
+        gap: 15px;
+    }
+
+    .chart-card {
+        height: 390px;
+        background: #FFFFFF;
+        padding: 20px;
+        border-radius: 14px;
+        box-shadow: 0 6px 16px rgba(0,0,0,0.8);
+    }
+
+    .chart-title {
+        font-size: 20px;
+        font-weight: 700;
+        color: #0F172A;
+        margin-bottom: 2px;
+        text-align: center;
+    }
+
+    .chart-card canvas {
+        width: 100%;
+        height: 300px;
+    }
+
+    
+</style>
+
+
+
+
+<!--sidebar-->
+<div class="sidebar">
+    <div class="sidebar-name"> <a style="color: Blue">Y</a>oussef <a style="color:blue">A</a>uto<a style="color: Blue">H</a>ub</div>
+
+    <div class="sidebar-actions">
+        <a href="/Admin/Admin" class="sidebar-action-btns"> <i data-lucide="layout-dashboard"></i> Dashboard</a>
+        <a href="/Admin/Cars" class="sidebar-action-btns"> <i data-lucide="car-front"></i> Cars</a>
+        <a href="/Admin/Customers" class="sidebar-action-btns"><i data-lucide="users"></i>Customers</a>
+        <a href="/Admin/RentRequest" class="sidebar-action-btns"><i data-lucide="clipboard-list"></i>Rent Requests</a>
+        <a href="/Admin/Calendar" class="sidebar-action-btns"><i data-lucide="calendar"></i>Calendar</a>
+        <a href="/Admin/WebsiteContent" class="sidebar-action-btns"><i data-lucide="globe"></i>Website Content</a>
+        <a href="/Admin/Settings" class="sidebar-action-btns"><i data-lucide="settings"></i>Settings</a>
+    </div>
+</div>
+
+<div class="first-row-container">
+    <!--Cards-->
+    <div class="cards-container">
+        <div class="card">
+            <div class="card-info">
+                <div class="card-icon">🚗</div>
+                <div class="card-value">120</div>
+                <div class="card-label">Total Cars</div>
+            </div>
+            <div class="card-ring"></div>
+        </div>
+        <div class="card">
+            <div class="card-info">
+                <div class="card-icon">✅</div>
+                <div class="card-value">45</div>
+                <div class="card-label">Available</div>
+            </div>
+            <div class="card-ring"></div>
+        </div>
+    </div>
+    <div class="cards-container">
+        <div class="card">
+            <div class="card-info">
+                <div class="card-icon">🔑</div>
+                <div class="card-value">75</div>
+                <div class="card-label">Rented</div>
+            </div>
+            <div class="card-ring"></div>
+        </div>
+        <div class="card">
+            <div class="card-info">
+                <div class="card-icon">👤</div>
+                <div class="card-value">312</div>
+                <div class="card-label">Customers</div>
+            </div>
+            <div class="card-ring"></div>
+        </div>
+    </div>
+    <div class="best-rated-cars">
+            <div class="card-info">
+                <div class="card-icon">🔑</div>
+                <div class="card-value">75</div>
+                <div class="card-label">Best Rated Cars</div>
+            </div>
+    </div>
+
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <!--Daily cars views depending on the type of the car or price-->
+    <div class="pie-container">
+        <div class="chart-card">
+            <div class="chart-title">Car views depending on Type <hr /></div>
+            <div class="pie"></div>
+        </div>
+    </div>
+</div>
+
+<!--Calendar-->
+<div class="activity-calendar-row">
+    <!-- Recent Activity-->
+    <div class="recent-activity">
+        <div class="recent-activity-title">Recent Activity <hr /></div>
+        <div class="recent-activity-info">
+        </div>
+    </div>
+
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/fullcalendar@6.1.11/index.global.min.css">
+    <script src="https://cdn.jsdelivr.net/npm/fullcalendar@6.1.11/index.global.min.js"></script>
+    <!--Calendar-->
+    <div class="calendar">
+        <div class="calendar-title">Choose a Date <hr /></div>
+        <div class="calendar-body">
+            <div id="calendar"></div>
+        </div>
+    </div>
+
+    <div class="notes">
+        <div class="notes-title">Your Notes <hr /></div>
+        <hr />
+        <div class="notes-info"></div>
+        <div class="notes-footer">
+            <input id="yournote" placeholder="Enter your note..."/>
+            <button id="addbtn">Add Note</button>
+        </div>
+    </div>
+</div>
+
+<script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+<!--Charts-->
+<div class="charts">
+    <div class="chart-card">
+        <div class="chart-title">Rentals per Month</div>
+        <canvas id="rentalsChart"></canvas>
+    </div>
+    <div class="chart-card">
+        <div class="chart-title">Revenue per Month</div>
+        <canvas id="revenueChart"></canvas>
+    </div>
+</div>
+
+
+
+
+
+<script src="https://unpkg.com/lucide@latest"></script>
+<script>
+    lucide.createIcons();
+
+       document.addEventListener("DOMContentLoaded", function () {
+
+        const rental = document.getElementById("rentalsChart");
+
+            new Chart(rental, {
+            type: "bar",
+            data: {
+                labels: ["Jan", "Feb", "Mar", "Apr", "May", "Jun", "Jul", "Aug", "Sep","Nov", "Oct", "Dec"],
+                datasets: [{
+                    data: [12, 19, 8, 15, 22, 27,40,65,89,93, 11, 100],
+                    backgroundColor: "#2563EB",
+                    borderRadius: 6
+                }]
+            },
+            options: {
+                responsive: true,
+                maintainAspectRatio: false,
+                plugins: { legend: { display: false } },
+                scales: {
+                    y: { beginAtZero: true }
+                }
+            }
+        });  //rental chart
+        
+        const revenue = document.getElementById("revenueChart");
+
+            new Chart(revenue, {
+                type: "line",
+                data: {
+                    labels: ["Jan", "Feb", "Mar", "Apr", "May", "Jun"],
+                    datasets: [{
+                        data: [4200, 6100, 2950, 4800, 7200, 6500],
+                        backgroundColor: "#2563EB",
+                        borderRadius: 6
+                        
+                    }]
+                },
+                options: {
+                    responsive: true,
+                    maintainAspectRatio: false,
+                    plugins: { legend: { display: false } },
+                    scales: {
+                        y: { beginAtZero: true }
+                    }
+                }
+            }); //revenue chart
+
+        const calendarEl = document.getElementById("calendar");
+
+        const calendar = new FullCalendar.Calendar(calendarEl, {
+            initialView: "dayGridMonth",
+            headerToolbar: {
+                left: "prev,next today",
+                center: "title",
+                right: ""
+            },
+            events: [{},{}]
+        }); // calendar
+
+        calendar.render();
+
+    });
+</script>
